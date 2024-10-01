@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "builder",
+    "authentication",
+    "landing",
     "crispy_forms",
     "crispy_bootstrap5"
 ]
@@ -57,7 +59,7 @@ ROOT_URLCONF = "splashTechForms.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -125,5 +127,13 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# CRISPY FORM STUFF
+
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 CRISPY_ALLOWED_TEMPLATE_PACK = "bootstrap5"
+
+# AUTHENTICATION REDIRECTS
+
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "login"
+LOGIN_URL = "login"
