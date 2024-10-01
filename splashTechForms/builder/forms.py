@@ -24,6 +24,7 @@ class AddFieldForm(forms.ModelForm):
                 ('checkbox', 'Checkbox'),
                 ('select', 'Dropdown'),
                 ('date', 'Date Picker'),
+                ('email', 'Email Field'),
             ]),
         }
 

@@ -33,6 +33,7 @@ FIELD_TYPES = [
     ('checkbox', 'Checkbox'),
     ('select', 'Dropdown'),
     ('date', 'Date Picker'),
+    ('email', 'Email Field'),
 ]
 
 

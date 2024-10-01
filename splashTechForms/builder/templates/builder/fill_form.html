@@ -39,9 +39,13 @@
                 {% endfor %}
             </select>
 
-            <!-- Date Field with Date Picker -->
+            <!-- Date Field -->
             {% elif field.field_type == "date" %}
             <input type="date" class="form-control" name="{{ field.label }}" {% if field.required %}required{% endif %}>
+
+            <!-- Email Field -->
+            {% elif field.field_type == "email" %}
+            <input type="email" class="form-control" name="{{ field.label }}" {% if field.required %}required{% endif %}>
 
             {% endif %}
         </div>
