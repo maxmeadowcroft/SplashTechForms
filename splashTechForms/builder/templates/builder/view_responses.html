@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center">Responses for {{ form.title }}</h2>
+
+    <ul class="list-group mt-4">
+        {% for response in responses %}
+        <li class="list-group-item">
+            <pre>{{ response.submission_data|safe }}</pre>
+        </li>
+        {% empty %}
+        <li class="list-group-item">No responses yet.</li>
+        {% endfor %}
+    </ul>
+
+    <div class="mt-3 text-center">
+        <a href="{% url 'dashboard' %}" class="btn btn-primary">Back to Dashboard</a>
+    </div>
+</div>
+{% endblock %}

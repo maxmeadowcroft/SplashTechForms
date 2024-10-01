@@ -30,6 +30,11 @@
                 <li class="list-group-item">No options added yet.</li>
                 {% endfor %}
             </ul>
+
+            <!-- Save Changes and Return to Field Management -->
+            <div class="mt-4 text-center">
+                <a href="{% url 'manage_fields' field.form.form_hash %}" class="btn btn-success w-100">Save and Return to Field Management</a>
+            </div>
         </div>
     </div>
 </div>

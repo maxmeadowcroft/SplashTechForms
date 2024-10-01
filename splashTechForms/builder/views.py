@@ -32,9 +32,9 @@ def dashboard_view(request):
 
 
 @login_required
-def create_or_edit_form_view(request, form_id=None):
-    if form_id:
-        form_instance = get_object_or_404(Form, id=form_id, creator=request.user)
+def create_or_edit_form_view(request, form_hash=None):
+    if form_hash:
+        form_instance = get_object_or_404(Form, form_hash=form_hash, creator=request.user)
     else:
         form_instance = None
 
@@ -121,3 +121,10 @@ def delete_form_view(request, form_hash):
     form_instance = get_object_or_404(Form, form_hash=form_hash, creator=request.user)
     form_instance.delete()
     return redirect('dashboard')
+
+
+@login_required
+def view_responses(request, form_hash):
+    form_instance = get_object_or_404(Form, form_hash=form_hash, creator=request.user)
+    responses = FormSubmission.objects.filter(form=form_instance)
+    return render(request, 'builder/view_responses.html', {'form': form_instance, 'responses': responses})

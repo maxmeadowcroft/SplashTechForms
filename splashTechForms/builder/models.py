@@ -10,18 +10,18 @@ class Form(models.Model):
     description = models.TextField(blank=True, null=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    form_hash = models.CharField(max_length=16, unique=True, blank=True, null=True)  # Increased hash length
+    form_hash = models.CharField(max_length=16, unique=True, blank=True, null=True)
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
+        # Add the correct `/app/` prefix to the URL for sharing the form
         return f"/app/form/{self.form_hash}/fill/"
 
     def save(self, *args, **kwargs):
-        # Generate a unique hash for new forms, using a longer portion of the hash
         if not self.form_hash:
-            self.form_hash = hashlib.sha256(f"{self.title}{self.created_at}".encode('utf-8')).hexdigest()[:16]  # Longer hash
+            self.form_hash = hashlib.sha256(f"{self.title}{self.created_at}".encode('utf-8')).hexdigest()[:16]
         super().save(*args, **kwargs)
 
 
@@ -46,7 +46,7 @@ class FormField(models.Model):
         return f"{self.label} ({self.get_field_type_display()})"
 
     def needs_options(self):
-        return self.field_type in ['radio', 'select']
+        return self.field_type in ['radio', 'select', 'checkbox']
 
 
 # Options for fields like radio buttons and dropdowns
