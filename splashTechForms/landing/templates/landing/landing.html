@@ -1,6 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Welcome</h1>
-    <a class="btn btn-primary" href="#">Login</a>
+<div class="container-fluid min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="row text-center">
+        <div class="col-md-12">
+            <div class="p-5 bg-white rounded shadow-lg">
+                <h1 class="display-4 fw-bold text-primary mb-4">Welcome to SplashTechForms</h1>
+                <p class="lead text-muted mb-4">
+                    This is a form builder, it is super simple and in early stages of development.
+                </p>
+                <div class="d-flex justify-content-center">
+                    <a class="btn btn-lg btn-primary me-3" href="{% url 'login' %}">Login</a>
+                    <a class="btn btn-lg btn-outline-secondary" href="{% url 'register' %}">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

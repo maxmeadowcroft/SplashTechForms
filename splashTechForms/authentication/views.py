@@ -7,7 +7,7 @@ from .forms import RegisterForm
 
 def register_view(request):
     if request.user.is_authenticated:
-        return redirect('home')  # Redirect authenticated users
+        return redirect('form_view')  # Redirect authenticated users
 
     if request.method == 'POST':
         form = RegisterForm(request.POST)
