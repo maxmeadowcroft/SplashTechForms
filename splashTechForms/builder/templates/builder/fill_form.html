@@ -13,18 +13,18 @@
         {% for field in form.fields.all %}
         <div class="mb-4">
             <!-- Field Title as h4, description italicized and subtle -->
-            <h4 class="form-label text-dark mb-2">{{ field.label }}</h4>
+            <h5 class="form-label text-dark mb-2">{{ field.label }}</h5>
             {% if field.description %}
             <p class="text-muted mb-3"><em>{{ field.description }}</em></p>
             {% endif %}
 
             <!-- Text Field -->
             {% if field.field_type == "text" %}
-            <input type="text" class="form-control form-control-lg" name="{{ field.label }}" {% if field.required %}required{% endif %}>
+            <input type="text" class="form-control form-control-md" name="{{ field.label }}" {% if field.required %}required{% endif %}>
 
             <!-- Textarea -->
             {% elif field.field_type == "textarea" %}
-            <textarea class="form-control form-control-lg" name="{{ field.label }}" rows="4" {% if field.required %}required{% endif %}></textarea>
+            <textarea class="form-control form-control-md" name="{{ field.label }}" rows="4" {% if field.required %}required{% endif %}></textarea>
 
             <!-- Radio Buttons -->
             {% elif field.field_type == "radio" %}
@@ -45,11 +45,11 @@
 
             <!-- Date Field -->
             {% elif field.field_type == "date" %}
-            <input type="date" class="form-control form-control-lg" name="{{ field.label }}" {% if field.required %}required{% endif %}>
+            <input type="date" class="form-control form-control-md" name="{{ field.label }}" {% if field.required %}required{% endif %}>
 
             <!-- Email Field -->
             {% elif field.field_type == "email" %}
-            <input type="email" class="form-control form-control-lg" name="{{ field.label }}" {% if field.required %}required{% endif %}>
+            <input type="email" class="form-control form-control-md" name="{{ field.label }}" {% if field.required %}required{% endif %}>
 
             <!-- Checkboxes -->
             {% elif field.field_type == "checkbox" %}
