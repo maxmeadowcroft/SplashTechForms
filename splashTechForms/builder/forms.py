@@ -11,10 +11,21 @@ class CreateFormForm(forms.ModelForm):
 
 
 # Form to create or edit fields
+
 class AddFieldForm(forms.ModelForm):
     class Meta:
         model = FormField
-        fields = ['label', 'description', 'field_type', 'required']
+        fields = ['label', 'field_type', 'required']
+        widgets = {
+            'field_type': forms.Select(choices=[
+                ('text', 'Text Field'),
+                ('textarea', 'Text Area'),
+                ('radio', 'Radio Buttons'),
+                ('checkbox', 'Checkbox'),
+                ('select', 'Dropdown'),
+                ('date', 'Date Picker'),
+            ]),
+        }
 
 
 # Form for adding options to fields (radio buttons, dropdowns)

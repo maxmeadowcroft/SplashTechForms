@@ -32,6 +32,7 @@ FIELD_TYPES = [
     ('radio', 'Radio Buttons'),
     ('checkbox', 'Checkbox'),
     ('select', 'Dropdown'),
+    ('date', 'Date Picker'),
 ]
 
 

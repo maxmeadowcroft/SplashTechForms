@@ -13,10 +13,16 @@
         {% for field in form.fields.all %}
         <div class="mb-3">
             <label class="form-label">{{ field.label }}</label>
+
+            <!-- Text Field -->
             {% if field.field_type == "text" %}
             <input type="text" class="form-control" name="{{ field.label }}" {% if field.required %}required{% endif %}>
+
+            <!-- Textarea -->
             {% elif field.field_type == "textarea" %}
             <textarea class="form-control" name="{{ field.label }}" {% if field.required %}required{% endif %}></textarea>
+
+            <!-- Radio Buttons -->
             {% elif field.field_type == "radio" %}
             {% for option in field.options.all %}
             <div class="form-check">
@@ -24,12 +30,19 @@
                 <label class="form-check-label">{{ option.value }}</label>
             </div>
             {% endfor %}
+
+            <!-- Dropdown/Select -->
             {% elif field.field_type == "select" %}
             <select class="form-select" name="{{ field.label }}" {% if field.required %}required{% endif %}>
                 {% for option in field.options.all %}
                 <option value="{{ option.value }}">{{ option.value }}</option>
                 {% endfor %}
             </select>
+
+            <!-- Date Field with Date Picker -->
+            {% elif field.field_type == "date" %}
+            <input type="date" class="form-control" name="{{ field.label }}" {% if field.required %}required{% endif %}>
+
             {% endif %}
         </div>
         {% endfor %}
