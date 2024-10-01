@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Add Options for {{ field.label }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-body">
+            <h2 class="text-center text-primary mb-4">Add Options for {{ field.label }}</h2>
+
+            <!-- Form to Add New Options -->
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="option_value" class="form-label">Option Value</label>
+                    <input type="text" class="form-control" name="option_value" id="option_value" required>
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary w-100">Add Option</button>
+            </form>
+
+            <!-- Display Existing Options -->
+            <h3 class="mt-4">Current Options</h3>
+            <ul class="list-group">
+                {% for option in field.options.all %}
+                <li class="list-group-item">
+                    {{ option.value }}
+                </li>
+                {% empty %}
+                <li class="list-group-item">No options added yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

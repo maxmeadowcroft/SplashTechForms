@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Fill Out Form{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-center text-primary">{{ form.title }}</h2>
+    <p class="text-center">{{ form.description }}</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {% for field in form.fields.all %}
+        <div class="mb-3">
+            <label class="form-label">{{ field.label }}</label>
+            {% if field.field_type == "text" %}
+            <input type="text" class="form-control" name="{{ field.label }}" {% if field.required %}required{% endif %}>
+            {% elif field.field_type == "textarea" %}
+            <textarea class="form-control" name="{{ field.label }}" {% if field.required %}required{% endif %}></textarea>
+            {% elif field.field_type == "radio" %}
+            {% for option in field.options.all %}
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="{{ field.label }}" value="{{ option.value }}" {% if field.required %}required{% endif %}>
+                <label class="form-check-label">{{ option.value }}</label>
+            </div>
+            {% endfor %}
+            {% elif field.field_type == "select" %}
+            <select class="form-select" name="{{ field.label }}" {% if field.required %}required{% endif %}>
+                {% for option in field.options.all %}
+                <option value="{{ option.value }}">{{ option.value }}</option>
+                {% endfor %}
+            </select>
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-lg btn-primary w-100">Submit</button>
+    </form>
+</div>
+{% endblock %}
