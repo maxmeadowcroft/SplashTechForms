@@ -128,3 +128,11 @@ def view_responses(request, form_hash):
     form_instance = get_object_or_404(Form, form_hash=form_hash, creator=request.user)
     responses = FormSubmission.objects.filter(form=form_instance)
     return render(request, 'builder/view_responses.html', {'form': form_instance, 'responses': responses})
+
+
+@login_required
+def delete_field_option_view(request, option_id):
+    option = get_object_or_404(FieldOption, id=option_id, form_field__form__creator=request.user)
+    form_hash = option.form_field.form.form_hash
+    option.delete()
+    return redirect('add_field_options', field_id=option.form_field.id)

@@ -15,4 +15,5 @@ urlpatterns = [
     path('form/field/<int:field_id>/delete/', views.delete_field_view, name='delete_field'),
     path('form/field/<int:field_id>/options/', views.add_field_options_view, name='add_field_options'),
     path('app/form/<str:form_hash>/responses/', views.view_responses, name='view_responses'),
+path('form/field/option/<int:option_id>/delete/', views.delete_field_option_view, name='delete_field_option'),
 ]

@@ -1,18 +1,37 @@
 {% extends "base.html" %}
 
+{% load extras %}
+
 {% block content %}
 <div class="container mt-4">
     <h2 class="text-center">Responses for {{ form.title }}</h2>
 
-    <ul class="list-group mt-4">
-        {% for response in responses %}
-        <li class="list-group-item">
-            <pre>{{ response.submission_data|safe }}</pre>
-        </li>
-        {% empty %}
-        <li class="list-group-item">No responses yet.</li>
-        {% endfor %}
-    </ul>
+    {% if responses %}
+    <div class="table-responsive mt-4">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <!-- Dynamically generate table headers based on the fields in the form -->
+                    {% for field in form.fields.all %}
+                    <th>{{ field.label }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through each response and display its data in a table row -->
+                {% for response in responses %}
+                <tr>
+                    {% for field in form.fields.all %}
+                    <td>{{ response.submission_data|get_item:field.label }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-center">No responses yet.</p>
+    {% endif %}
 
     <div class="mt-3 text-center">
         <a href="{% url 'dashboard' %}" class="btn btn-primary">Back to Dashboard</a>
