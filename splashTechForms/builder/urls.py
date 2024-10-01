@@ -5,6 +5,9 @@ from . import views
 
 urlpatterns = [
     path('', views.dashboard_view, name='dashboard'),
-    path('form/create/', views.create_form_view, name='create_form'),
-    path('form/<int:form_id>/data/', views.form_data_view, name='form_data'),
+    path('form/create/', views.create_or_edit_form_view, name='create_form'),
+    path('form/<int:form_id>/edit/', views.create_or_edit_form_view, name='edit_form'),
+    path('form/<int:form_id>/fields/', views.manage_fields_view, name='manage_fields'),
+    path('form/field/<int:field_id>/edit/', views.edit_field_view, name='edit_field'),
+    path('form/field/<int:field_id>/delete/', views.delete_field_view, name='delete_field'),
 ]
