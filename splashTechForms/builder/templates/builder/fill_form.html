@@ -4,28 +4,32 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h2 class="text-center text-primary">{{ form.title }}</h2>
-    <p class="text-center">{{ form.description }}</p>
+    <h2 class="text-center text-primary mb-4">{{ form.title }}</h2>
+    <p class="text-center text-muted mb-5">{{ form.description }}</p>
 
-    <form method="POST">
+    <form method="POST" class="p-4 border rounded-3 shadow-sm bg-light">
         {% csrf_token %}
 
         {% for field in form.fields.all %}
-        <div class="mb-3">
-            <label class="form-label">{{ field.label }}</label>
+        <div class="mb-4">
+            <!-- Field Title as h4, description italicized and subtle -->
+            <h4 class="form-label text-dark mb-2">{{ field.label }}</h4>
+            {% if field.description %}
+            <p class="text-muted mb-3"><em>{{ field.description }}</em></p>
+            {% endif %}
 
             <!-- Text Field -->
             {% if field.field_type == "text" %}
-            <input type="text" class="form-control" name="{{ field.label }}" {% if field.required %}required{% endif %}>
+            <input type="text" class="form-control form-control-lg" name="{{ field.label }}" {% if field.required %}required{% endif %}>
 
             <!-- Textarea -->
             {% elif field.field_type == "textarea" %}
-            <textarea class="form-control" name="{{ field.label }}" {% if field.required %}required{% endif %}></textarea>
+            <textarea class="form-control form-control-lg" name="{{ field.label }}" rows="4" {% if field.required %}required{% endif %}></textarea>
 
             <!-- Radio Buttons -->
             {% elif field.field_type == "radio" %}
             {% for option in field.options.all %}
-            <div class="form-check">
+            <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="{{ field.label }}" value="{{ option.value }}" {% if field.required %}required{% endif %}>
                 <label class="form-check-label">{{ option.value }}</label>
             </div>
@@ -33,7 +37,7 @@
 
             <!-- Dropdown/Select -->
             {% elif field.field_type == "select" %}
-            <select class="form-select" name="{{ field.label }}" {% if field.required %}required{% endif %}>
+            <select class="form-select form-select-lg" name="{{ field.label }}" {% if field.required %}required{% endif %}>
                 {% for option in field.options.all %}
                 <option value="{{ option.value }}">{{ option.value }}</option>
                 {% endfor %}
@@ -41,17 +45,26 @@
 
             <!-- Date Field -->
             {% elif field.field_type == "date" %}
-            <input type="date" class="form-control" name="{{ field.label }}" {% if field.required %}required{% endif %}>
+            <input type="date" class="form-control form-control-lg" name="{{ field.label }}" {% if field.required %}required{% endif %}>
 
             <!-- Email Field -->
             {% elif field.field_type == "email" %}
-            <input type="email" class="form-control" name="{{ field.label }}" {% if field.required %}required{% endif %}>
+            <input type="email" class="form-control form-control-lg" name="{{ field.label }}" {% if field.required %}required{% endif %}>
+
+            <!-- Checkboxes -->
+            {% elif field.field_type == "checkbox" %}
+            {% for option in field.options.all %}
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" name="{{ field.label }}" value="{{ option.value }}" {% if field.required %}required{% endif %}>
+                <label class="form-check-label">{{ option.value }}</label>
+            </div>
+            {% endfor %}
 
             {% endif %}
         </div>
         {% endfor %}
 
-        <button type="submit" class="btn btn-lg btn-primary w-100">Submit</button>
+        <button type="submit" class="btn btn-lg btn-primary w-100 py-3">Submit</button>
     </form>
 </div>
 {% endblock %}
